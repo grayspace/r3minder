@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <link data-require="bootstrap@*" data-semver="3.3.5" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+  />
+  <link data-require="bootstrap@*" data-semver="3.3.5" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+  />
+  <link rel='stylesheet' type='text/css' href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" />
+  <link rel='stylesheet' type='text/css' href="https://fonts.googleapis.com/css?family=Lato" />
+  <link rel="stylesheet" href="style.css" />
+  <title>r3minder.com - Remind, Refocus, and Realize your goals</title>
+  <meta name="description" content="Get reminders right in your browser. Perfect for goals, limiting internet time & more!">
+  <meta name="author" content="Gray Hamilton">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="logoDiv">
+    <h1>r<span>3</span>minder</h1>
+    <h2><span>R</span>EMIND &nbsp;/&nbsp; <span>R</span>EFOCUS &nbsp;/&nbsp; <span>R</span>EALIZE</h2>
+  </div>
+  <div class="container-fluid centerWrapper">
+    <!-- Shows when r3minder is not running -->
+    <div id="formDiv">
+      <p class="text-muted tdp2">Enter a message to display after
+        <br/>your <b>r3minder</b> is up.</p>
+      <input id="goalInput" type="text" class="form-control" placeholder="Take a walk!" />
+      <div class="row">
+        <button type="submit" class="timerBtns btn btn-info" onclick="startTimer(300);"><span class="glyphicon glyphicon-play"></span> 5 min</button>
+        <button type="submit" class="timerBtns btn btn-info" onclick="startTimer(600);"><span class="glyphicon glyphicon-play"></span> 10 min</button>
+        <button type="submit" class="timerBtns btn btn-info" onclick="startTimer(1200);"><span class="glyphicon glyphicon-play"></span> 20 min</button>
+        <button type="submit" class="timerBtns btn btn-info" onclick="startTimer(1800);"><span class="glyphicon glyphicon-play"></span> 30 min</button>
+      </div>
+      <div class="customTimerDiv">
+        <div id="customTimerGroup" class="input-group">
+          <!-- Add min="1" set minimum 1 minute -->
+          <input id="customTimerInput" type="number" step="any" class="form-control required" placeholder="45">
+          <span class="input-group-btn"><button id="btnCustomTimer" type="button" onclick="startCustomTimer()" class="btn btn-info"><span class="glyphicon glyphicon-play"></span>&nbsp;
+          <span
+          id="customTimerMin"></span>&nbsp;min</button>
+            </span>
+        </div>
+      </div>
+      <div class="customTimerAlertDiv">
+        <div id="customTimerAlert" class="alert alert-warning" style="display: none;">
+          <strong><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;Please enter minutes for your timer.</strong>
+        </div>
+      </div>
+    </div>
+    <!-- Shows when r3minder is running -->
+    <div id="timerDiv" style="display:none;">
+      <p class="text-muted"><strong>r3minder set!</strong></p>
+      <p class="text-muted tdp2">Just leave this tab open and we'll let you know when time is up.</p>
+      <button id="btnOpenNew" class="btn btn-info" onclick="openNewTab()"><span class="glyphicon glyphicon-new-window"></span> <span>&nbsp;Open new tab</span></button>
+      <p id="yourGoal"></p>
+      <h1 class="text-muted"><span id="timeLeft"></span></h1>
+      <button id="btnStop" class="btn btn-danger" onclick="stopTimer()" style="margin-top: 10px;"><span class="glyphicon glyphicon-stop"></span> Stop</button>
+    </div>
+  </div>
+  <div class="container-fluid bottomDiv">
+    <div id="saveOrBookmark" style="display: none;">
+      <p class="lead">Want to fight distractions & accomplish goals like a boss?</p>
+      <p>Set r3minder.com as your browser's start page,
+        <br/>or CTRL+D to bookmark it!</p>
+    </div>
+    <div id="uses">
+      <h3>POPULAR USES</h3>
+      <p><span data-use="Biscuits are done!">Reminders</span> | <span data-use="Practice guitar!">Goals</span> | <span data-use="Keep up the good work!">Affirmations</span></p>
+      <p><span data-use="No reddit during work!">Limiting internet time</span> | <span data-use="Time for a break!">Taking frequent breaks</span></p>
+      <p><span data-use="Meditation time is up!">Meditation</span> | <span data-use="Back to the books!">Studying</span> |
+        <span
+        data-use="50 pushups!">Exercise</span>
+      </p>
+    </div>
+    <br/>
+    <p style="color: #999; font-size: 18px;">How do you use r3minder?
+      <br/>Tell us at:
+      <a style="color: orange;" href="mailto:r3minderinfo@gmail.com?subject=r3minder+Info">r3minderinfo@gmail.com</a>
+    </p>
+    <p style="color: #999; font-size: 12px;">&copy;<span id="currentYear"></span> r3minder.com</p>
+  </div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script data-require="bootstrap@*" data-semver="3.3.5" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="jquery.countdown.js"></script>
+  <script src="script.js"></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-10626227-10', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+</body>
+
+</html>
