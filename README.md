@@ -1,1 +1,1 @@
-The readme for the r3minder.com web application.
+Reminder / timer web app based on JQuery & Bootstrap.
